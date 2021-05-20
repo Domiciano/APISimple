@@ -4,6 +4,7 @@ import model.Estudiante;
 import provider.EstudianteProvider;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class EstudiantesServices {
             return Response
                     .status(200)
                     .entity(estudiantes)
+                    .header("Access-Control-Allow-Origin","*")
                     .build();
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -37,5 +39,13 @@ public class EstudiantesServices {
                     .build();
         }
     }
+
+    @Path("create")
+    @POST
+    public Response create() {
+        //...
+        return null;
+    }
+
 
 }
