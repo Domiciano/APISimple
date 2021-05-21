@@ -5,6 +5,7 @@ class Card{
     constructor(user) {
         this.user = user;
         this.delete = null;
+        //undefined
     }
 
 
@@ -31,7 +32,7 @@ class Card{
         //2. Con el HTML
         let html =  "<div class='card'>" +
                         "<p>"+this.user.nombre+"</p>" +
-                        "<small>"+this.user.tel+"</small>" +
+                        "<small>"+this.user.codigo+"</small>" +
                         "<button class='deletebtn' id='delete"+this.user.id+"'>X</button>"+
                     "</div>";
 
@@ -44,11 +45,36 @@ class Card{
         //Acciones interactivas
         let button = document.getElementById('delete'+this.user.id);
         button.addEventListener('click', ()=>{
-            this.delete(this);
+
+            this.deleteFromDb(
+                ()=>{
+                        this.delete(this);
+                    }
+            );
+
+
+
+
         });
 
 
+    }
 
+    deleteFromDb = (elim)=>{
+        //Eliminar por ID
+        var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if(this.readyState === 4) {
+                console.log(this.status);
+                if(this.status === 200){
+                    elim();
+                }else if(status === 500){
+
+                }
+            }
+        });
+        xhr.open("DELETE", "api/estudiante/delete/"+this.user.id);
+        xhr.send();
     }
 
 

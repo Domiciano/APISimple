@@ -21,6 +21,11 @@ public class DBConnection {
         return resultSet;
     }
 
+    public void execute(String sql) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.execute(sql);
+    }
+
     public void close() throws SQLException {
         connection.close();
     }

@@ -35,4 +35,9 @@ public class EstudianteProvider {
 
     }
 
+    public void deleteById(String id) throws ClassNotFoundException, SQLException {
+        DBConnection connection = new DBConnection();
+        connection.connect();
+        connection.execute("DELETE FROM estudiantes WHERE id="+id);
+    }
 }
